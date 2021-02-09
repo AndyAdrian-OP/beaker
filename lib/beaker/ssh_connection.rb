@@ -1,6 +1,7 @@
 require 'socket'
 require 'timeout'
 require 'net/scp'
+require 'pry'
 
 module Beaker
   class SshConnection
@@ -307,6 +308,7 @@ module Beaker
           result.stdout << "\tcopying %s: %10d/%d\n" % [name, sent, total]
         end
       rescue => e
+        binding.pry
         logger.warn "#{e.class} error in scp'ing. Forcing the connection to close, which should " <<
           "raise an error."
         close
